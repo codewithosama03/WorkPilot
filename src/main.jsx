@@ -95,10 +95,10 @@ function AppWrapper() {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-  <ClerkProvider 
+<ClerkProvider 
   publishableKey={clerkPubKey}
-  afterSignInUrl="/dashboard"
-  afterSignUpUrl="/dashboard"
+  signInFallbackRedirectUrl="/dashboard"
+  signUpFallbackRedirectUrl="/dashboard"
 >
   <AppWrapper />
 </ClerkProvider>

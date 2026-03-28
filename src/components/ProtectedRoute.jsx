@@ -1,26 +1,22 @@
 import { Navigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
+  const { isSignedIn, isLoaded } = useUser();
+  const navigate = useNavigate();
 
-  const { isSignedIn, isLoaded, user } = useUser();
+  useEffect(() => {
+    if (isSignedIn) {
+      navigate("/dashboard");
+    }
+  }, [isSignedIn]);
 
-  //  Wait until Clerk loads
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
+  if (!isLoaded) return <div>Loading...</div>;
 
-  //  Not logged in → redirect
-  if (!isSignedIn) {
-    return <Navigate to="/login" />;
-  }
+  if (!isSignedIn) return <Navigate to="/login" />;
 
-  //  Store user id safely
-  if (user?.id) {
-    localStorage.setItem("current_user_id", user.id);
-  }
-
-  //  Allow access
   return children;
 }
 
