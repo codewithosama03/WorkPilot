@@ -61,42 +61,86 @@ function Home() {
       </section>
 
       {/* PRODUCT SHOWCASE */}
-      <section className="w-[90%] mx-auto py-20">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={container}
-          className="grid md:grid-cols-2 gap-10 items-center"
-        >
-          {/* LEFT */}
-          <motion.div variants={fadeUp}>
-            <h2 className="text-3xl font-bold mb-4">
-              Visualize Your Workflow
-            </h2>
-            <p className="text-gray-500">
-              Get a clear overview of tasks, progress, and priorities with
-              a powerful Kanban system designed for real productivity.
-            </p>
-          </motion.div>
+ <section className="w-[90%] mx-auto py-20">
+  <motion.div
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    variants={container}
+    className="grid md:grid-cols-2 gap-10 items-center"
+  >
+    {/* LEFT */}
+    <motion.div variants={fadeUp}>
+      <h2 className="text-3xl font-bold mb-4">
+        Visualize Your Workflow
+      </h2>
+      <p className="text-gray-500 mb-6">
+        Get a clear overview of tasks, progress, and priorities with
+        a powerful Kanban system designed for real productivity.
+      </p>
 
-          {/* RIGHT IMAGE */}
-          <motion.div
-            variants={fadeUp}
-            className="p-6 rounded-xl border 
-            bg-gray-100 dark:bg-gray-800 
-            border-gray-200 dark:border-gray-700 
-            hover:shadow-xl transition
-            flex items-center justify-center"
-          >
-            <img
-               src={img}
-              alt="WorkPilot Preview"
-              className="h-56 w-full max-w-md object-contain rounded-lg mx-auto"
-            />
-          </motion.div>
-        </motion.div>
-      </section>
+      <div className="space-y-2 text-sm text-gray-500">
+        <p>✔ Organize tasks with drag & drop</p>
+        <p>✔ Track progress in real-time</p>
+        <p>✔ Manage multiple projects easily</p>
+        <p>✔ Built for teams and individuals</p>
+      </div>
+    </motion.div>
+
+    {/* RIGHT - FAKE DASHBOARD UI */}
+    <motion.div
+      variants={fadeUp}
+      className="p-6 rounded-xl border 
+      bg-gray-100 dark:bg-gray-800 
+      border-gray-200 dark:border-gray-700 
+      hover:shadow-xl transition"
+    >
+      <div className="bg-white dark:bg-gray-900 rounded-lg p-4 space-y-4">
+
+        {/* Header */}
+        <div className="flex justify-between items-center">
+          <h3 className="font-semibold">Project Board</h3>
+          <span className="text-xs text-gray-400">WorkPilot</span>
+        </div>
+
+        {/* Columns */}
+        <div className="grid grid-cols-3 gap-3 text-xs">
+
+          {/* TODO */}
+          <div className="space-y-2">
+            <p className="font-medium text-gray-400">To Do</p>
+            <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded">
+              Setup UI
+            </div>
+            <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded">
+              Create API
+            </div>
+          </div>
+
+          {/* IN PROGRESS */}
+          <div className="space-y-2">
+            <p className="font-medium text-yellow-500">In Progress</p>
+            <div className="bg-yellow-100 dark:bg-yellow-900/30 p-2 rounded">
+              Auth Integration
+            </div>
+          </div>
+
+          {/* DONE */}
+          <div className="space-y-2">
+            <p className="font-medium text-green-500">Done</p>
+            <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded">
+              Project Setup
+            </div>
+            <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded">
+              Routing
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </motion.div>
+  </motion.div>
+</section>
 
       {/* FEATURES */}
       <section className="w-[90%] mx-auto py-20">
