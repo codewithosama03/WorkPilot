@@ -3,6 +3,9 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import img from "../assets/img1.png";
+
+
 
 
 function Home() {
@@ -87,7 +90,7 @@ function Home() {
             flex items-center justify-center"
           >
             <img
-              src="/img1.png"
+               src={img}
               alt="WorkPilot Preview"
               className="h-56 w-full max-w-md object-contain rounded-lg mx-auto"
             />
