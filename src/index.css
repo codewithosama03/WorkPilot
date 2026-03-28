@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+.react-calendar {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+  background-color: transparent;
+}
+
+.react-calendar__tile {
+  border-radius: 8px;
+  padding: 6px 0;
+  transition: 0.2s;
+}
+
+.react-calendar__tile:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.react-calendar__tile--active {
+  background: #2563eb;
+  color: white;
+}
+
+.react-calendar__navigation button {
+  font-weight: bold;
+  color: inherit;
+}
+
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-size: 10px;
+  color: gray;
+}
+
+html, body {
+  overflow-x: hidden;
+}
