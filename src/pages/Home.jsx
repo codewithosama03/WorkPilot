@@ -85,7 +85,7 @@ function Home() {
             flex items-center justify-center"
           >
             <img
-              src="img1.png"
+              src="/img1.png"
               alt="WorkPilot Preview"
               className="h-56 w-full max-w-md object-contain rounded-lg mx-auto"
             />
