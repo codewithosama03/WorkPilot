@@ -77,53 +77,66 @@ function Projects() {
         </h1>
 
         {/* CREATE PROJECT */}
-        <div className="mb-8 p-4 rounded-xl border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+       {/* CREATE PROJECT */}
 
-          {error && (
-            <div className="mb-4 p-3 rounded-lg border 
-              bg-red-100 text-red-700 
-              border-red-300 
-              dark:bg-red-900/30 dark:text-red-400 dark:border-red-800">
-              {error}
-            </div>
-          )}
+{!currentOrg ? (
 
-          <div className="flex flex-col lg:flex-row gap-3">
+  <div className="mb-8 rounded-xl border border-yellow-300 bg-yellow-50 dark:bg-yellow-900/20 dark:border-yellow-800 p-6">
 
-            <input
-              type="text"
-              placeholder="Project Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full flex-1 border p-2 rounded 
-              bg-white dark:bg-gray-800 
-              border-gray-300 dark:border-gray-700 
-              text-gray-900 dark:text-white"
-            />
+    <h2 className="text-xl font-semibold mb-2 text-yellow-800 dark:text-yellow-300">
+      No Workspace Found
+    </h2>
 
-            <input
-              type="text"
-              placeholder="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full flex-1 border p-2 rounded 
-              bg-white dark:bg-gray-800 
-              border-gray-300 dark:border-gray-700 
-              text-gray-900 dark:text-white"
-            />
+    <p className="text-sm text-yellow-700 dark:text-yellow-400">
+      You must create a Workspace first before creating projects.
+      Use the Workspace menu in the sidebar to create one.
+    </p>
 
-            <button
-              onClick={handleCreateProject}
-              className="px-4 py-2 rounded 
-              bg-gray-900 text-white 
-              dark:bg-white dark:text-black 
-              transition"
-            >
-              Create
-            </button>
+  </div>
 
-          </div>
-        </div>
+) : (
+
+<div className="mb-8 p-4 rounded-xl border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+
+  {error && (
+    <div className="mb-4 p-3 rounded-lg border
+      bg-red-100 text-red-700
+      border-red-300
+      dark:bg-red-900/30 dark:text-red-400 dark:border-red-800">
+      {error}
+    </div>
+  )}
+
+  <div className="flex flex-col lg:flex-row gap-3">
+
+    <input
+      type="text"
+      placeholder="Project Name"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      className="w-full flex-1 border p-2 rounded bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white"
+    />
+
+    <input
+      type="text"
+      placeholder="Description"
+      value={description}
+      onChange={(e) => setDescription(e.target.value)}
+      className="w-full flex-1 border p-2 rounded bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white"
+    />
+
+    <button
+      onClick={handleCreateProject}
+      className="px-4 py-2 rounded bg-gray-900 text-white dark:bg-white dark:text-black"
+    >
+      Create
+    </button>
+
+  </div>
+
+</div>
+
+)}
 
         {/* FILTERS */}
         <div className="mb-6 p-4 rounded-xl border bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 shadow-sm">

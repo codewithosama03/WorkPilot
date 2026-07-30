@@ -2,6 +2,8 @@ import { SignIn, useUser } from "@clerk/clerk-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import LoadingScreen from "../components/LoadingScreen";
+
 function Login() {
   const { isSignedIn, isLoaded } = useUser();
   const navigate = useNavigate();
@@ -11,6 +13,10 @@ function Login() {
       navigate("/dashboard");
     }
   }, [isSignedIn, isLoaded, navigate]);
+
+  if (!isLoaded) {
+  return <LoadingScreen />;
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">

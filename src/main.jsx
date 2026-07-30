@@ -1,84 +1,47 @@
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import App from "./App";
-// import "./index.css";
-
-// import { BrowserRouter } from "react-router-dom";
-// import { Provider } from "react-redux";
-
-// import { ClerkProvider, useUser } from "@clerk/clerk-react";
-
-// import { AuthProvider } from "./context/AuthContext";
-// import ThemeProvider from "./context/ThemeContext";
-
-// import { createAppStore } from "./app/store";
-
-// const clerkPubKey = "pk_test_ZWFzeS1zcGFuaWVsLTY2LmNsZXJrLmFjY291bnRzLmRldiQ";
-
-
-// function AppWrapper() {
-//   const { isLoaded, user } = useUser();
-
-//   if (!isLoaded) return <div>Loading...</div>;
-
-//   const userId = user?.id;
-
-//   //  CREATE STORE AFTER USER EXISTS
-//   const store = React.useMemo(() => {
-//     return createAppStore(userId);
-//   }, [userId]);
-
-//   return (
-//     <Provider store={store}>
-//       <AuthProvider>
-//         <ThemeProvider>
-//           <BrowserRouter>
-//             <App />
-//           </BrowserRouter>
-//         </ThemeProvider>
-//       </AuthProvider>
-//     </Provider>
-//   );
-// }
-
-
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <ClerkProvider publishableKey={clerkPubKey}>
-//       <AppWrapper />
-//     </ClerkProvider>
-//   </React.StrictMode>
-// );
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
+import LoadingScreen from "./components/LoadingScreen";
+
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import { ClerkProvider, useUser } from "@clerk/clerk-react";
+import {
+ClerkProvider,
+useAuth,
+useUser,
+} from "@clerk/clerk-react";
 
 import { AuthProvider } from "./context/AuthContext";
 import ThemeProvider from "./context/ThemeContext";
 
 import { createAppStore } from "./app/store";
 
-const clerkPubKey = "pk_test_ZWFzeS1zcGFuaWVsLTY2LmNsZXJrLmFjY291bnRzLmRldiQ";
+const clerkPubKey =
+"pk_test_ZWFzeS1zcGFuaWVsLTY2LmNsZXJrLmFjY291bnRzLmRldiQ";
+
 
 function AppWrapper() {
   const { isLoaded, user } = useUser();
+  const { isSignedIn } = useAuth();
 
-  const userId = user?.id;
+  const [store, setStore] = React.useState(null);
 
-  //  ALWAYS call hook (fixes hook error)
-  const store = React.useMemo(() => {
-    return createAppStore(userId);
-  }, [userId]);
+  React.useEffect(() => {
+    if (!isLoaded) return;
 
-  //  AFTER hooks
-  if (!isLoaded) return <div>Loading...</div>;
+    const appStore = createAppStore(
+      isSignedIn && user ? user.id : null
+    );
+
+    setStore(appStore);
+  }, [isLoaded, isSignedIn, user]);
+
+if (!isLoaded || !store) {
+  return <LoadingScreen />;
+}
 
   return (
     <Provider store={store}>
@@ -93,14 +56,13 @@ function AppWrapper() {
   );
 }
 
+
+
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-<ClerkProvider 
+<React.StrictMode> <ClerkProvider
    publishableKey={clerkPubKey}
-  afterSignInUrl="/dashboard"
-  afterSignUpUrl="/dashboard"
->
-  <AppWrapper />
-</ClerkProvider>
-  </React.StrictMode>
+   signInForceRedirectUrl="/dashboard"
+   signUpForceRedirectUrl="/dashboard"
+ > <AppWrapper /> </ClerkProvider>
+</React.StrictMode>
 );
