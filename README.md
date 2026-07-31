@@ -95,6 +95,10 @@ Context:
 
 ## Screenshots
 
+## landing page
+
+![landing](landing.png)
+
 ### Dashboard
 
 ![Dashboard](desk2.png)
